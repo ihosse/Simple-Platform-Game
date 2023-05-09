@@ -10,7 +10,6 @@ public class Mover : MonoBehaviour
     [SerializeField]
     private Transform end;
     [SerializeField]
-    //[FormerlySerializedAs("SawBladeSprite")] //Não apaga a referência anterior. Fazer antes de compilar
     private Transform sprite;
     [SerializeField]
     private float speed;
