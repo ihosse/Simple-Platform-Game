@@ -18,7 +18,6 @@ public class UILivesText : MonoBehaviour
 
     private void OnDestroy()
     {
-
         GameManager.Instance.OnLivesChanged -= HandleOnLivesChanged;
     }
 

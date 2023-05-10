@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public int Lives { get; private set; }
     public int Coins { get; private set; }
+
     public event Action<int> OnLivesChanged;
     public event Action<int> OnCoinsChanged;
+
     private int currentLevelIndex;
 
     private void Awake()

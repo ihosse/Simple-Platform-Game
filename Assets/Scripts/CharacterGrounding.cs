@@ -16,7 +16,7 @@ public class CharacterGrounding : MonoBehaviour
     private LayerMask layerMask;
 
     private Transform groundedObject;
-    private Vector3? groundedObjectLastPosition; //o ? deixa o vector 3 poder seu null
+    private Vector3? groundedObjectLastPosition;
 
     public bool IsGrounded { get; private set; }
     public Vector2 GroundedDirection { get; private set; }
