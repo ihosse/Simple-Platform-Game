@@ -27,13 +27,19 @@ public class PlayerMovementController : MonoBehaviour, IMove
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") && characterGrounding.IsGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
-            rigidbody2d.AddForce(Vector2.up * jumpForce);
-            if(characterGrounding.GroundedDirection != Vector2.down)
+            if (characterGrounding.isTouchingGround) 
             {
-                rigidbody2d.AddForce(characterGrounding.GroundedDirection * -1f * wallJumpForce);
+                rigidbody2d.AddForce(Vector2.up * jumpForce);
             }
+            else if(characterGrounding.IsTouchingWall)
+            {
+                rigidbody2d.AddForce(Vector2.up * jumpForce);
+                rigidbody2d.velocity = Vector2.zero;
+                rigidbody2d.AddForce(characterGrounding.ContactDirection * -1f * wallJumpForce);
+            }
+            
         }
     }
 
@@ -45,10 +51,5 @@ public class PlayerMovementController : MonoBehaviour, IMove
         Vector3 movement = new Vector3(horizontal, 0);
 
         transform.position += movement * Time.deltaTime * moveSpeed;
-    }
-
-    internal void Bounce()
-    {
-        rigidbody2d.AddForce(Vector2.up * jumpForce);
     }
 }

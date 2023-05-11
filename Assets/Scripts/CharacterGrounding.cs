@@ -7,7 +7,9 @@ using UnityEngine;
 public class CharacterGrounding : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] positions;
+    private Transform[] sidePositions;
+    [SerializeField]
+    private Transform[] footPositions;
 
     [SerializeField]
     private float maxDistance;
@@ -15,35 +17,44 @@ public class CharacterGrounding : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
-    private Transform groundedObject;
+    private Transform contactObject;
     private Vector3? groundedObjectLastPosition;
 
-    public bool IsGrounded { get; private set; }
-    public Vector2 GroundedDirection { get; private set; }
+    public bool isTouchingGround { get; private set; }
+    public bool IsTouchingWall { get; private set; }
+    public Vector2 ContactDirection { get; private set; }
 
     private void Update()
     {
-        foreach (var position in positions)
-        {
-            CheckFootForGrounding(position);
-            if (IsGrounded)
-                break;
-        }
+        IsTouchingWall = CheckContact(sidePositions);
+        isTouchingGround = CheckContact(footPositions);
 
         StickToMovingObjects();
     }
 
+    private bool CheckContact(Transform[] foots)
+    {
+        bool isContact;
+        foreach (var position in foots)
+        {
+            isContact = CheckContact(position);
+            if (isContact)
+                return true;
+        }
+        return false;
+    }
+
     private void StickToMovingObjects()
     {
-        if(groundedObject != null) 
+        if(contactObject != null) 
         {
             if(groundedObjectLastPosition.HasValue && 
-               groundedObjectLastPosition.Value != groundedObject.position)
+               groundedObjectLastPosition.Value != contactObject.position)
             {
-                Vector3 delta = groundedObject.position - groundedObjectLastPosition.Value;
+                Vector3 delta = contactObject.position - groundedObjectLastPosition.Value;
                 transform.position += delta;
             }
-            groundedObjectLastPosition = groundedObject.position;
+            groundedObjectLastPosition = contactObject.position;
         }
         else 
         {
@@ -51,25 +62,25 @@ public class CharacterGrounding : MonoBehaviour
         }
     }
 
-    private void CheckFootForGrounding(Transform foot) 
+    private bool CheckContact(Transform foot) 
     {
         var raycastHit = Physics2D.Raycast(foot.position, foot.forward, maxDistance, layerMask);
         Debug.DrawRay(foot.position, foot.forward * maxDistance, Color.red);
 
         if (raycastHit.collider != null)
         {
-            if(groundedObject != raycastHit.collider.transform)
+            if(contactObject != raycastHit.collider.transform)
             { 
                 groundedObjectLastPosition = raycastHit.collider.transform.position;
             }
-            groundedObject = raycastHit.collider.transform;
-            IsGrounded = true;
-            GroundedDirection = foot.forward;
+            contactObject = raycastHit.collider.transform;
+            ContactDirection = foot.forward;
+            return true;
         }
         else
         {
-            groundedObject = null;
-            IsGrounded = false;
+            contactObject = null;
+            return false;
         }
     }
 }

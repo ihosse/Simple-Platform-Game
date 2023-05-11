@@ -163,12 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7e94ab2f751474984fa64716b679a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - {fileID: 2308067393316758682}
-  - {fileID: 2308067392950110295}
-  - {fileID: 2308067393323426890}
+  sidePositions:
   - {fileID: 2308067393947459231}
   - {fileID: 2308067392879661168}
+  footPositions:
+  - {fileID: 2308067393316758682}
+  - {fileID: 2308067393323426890}
+  - {fileID: 2308067392950110295}
   maxDistance: 0.03
   layerMask:
     serializedVersion: 2
