@@ -12,7 +12,7 @@ public class CheckPointManager : MonoBehaviour
         checkpoints = GetComponentsInChildren<CheckPoint>();
     }
 
-    public CheckPoint GetLastCheckpointthatWasPassed() 
+    public CheckPoint GetLastCheckpointThatWasPassed() 
     {
         return checkpoints.Last(t => t.Passed == true);
     }

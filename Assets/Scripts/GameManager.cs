@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     private void SendPlayerToCheckPoint()
     {
         var checkpointManager = FindObjectOfType<CheckPointManager>();
-        var checkpoint = checkpointManager.GetLastCheckpointthatWasPassed();
+        var checkpoint = checkpointManager.GetLastCheckpointThatWasPassed();
         var player = FindObjectOfType<PlayerMovementController>();
 
         player.transform.position = checkpoint.transform.position;
