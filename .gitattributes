@@ -3,3 +3,4 @@
 
 *.shader linguist-language=None
 *.shaderlab linguist-language=None
+*.hlsl linguist-language=None
