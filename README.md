@@ -1,2 +1,12 @@
 # Simple2DPlatform
- Trying to complete and improve of a simple platform 2D Game (part of a exercise from an Advanced Unity Course) - Art by Pixel Frog
+2D Platform Prototype to study unity (Singleton Pattern - Based on a tutorial by  Jason Weimann)
+
+## Instructions:
+- Arrows to move
+- Space to Jump
+
+## Art: 
+- Pixel Frog (https://pixelfrog-assets.itch.io/)
+
+## Play it on Itch.io: 
+- https://ihosse.itch.io/
